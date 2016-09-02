@@ -45,6 +45,27 @@
         <div id="decrypt" class="section scrollspy">
           <h2 class="light-blue-text text-darken-4"> Decrypt </h2>
           <div class="divider"></div>
+		  
+		  <div class="input-field col s12">
+            <i class="material-icons prefix">edit</i>
+            <input id="ciphertext_input" type="text" class="validate">
+            <label for="icon_prefix">Ciphertext</label>
+          </div>
+		  
+		  <div class="input-field col s12">
+            <i class="material-icons prefix">edit</i>
+            <input id="key_input" type="text" class="validate">
+            <label for="icon_prefix">Key</label>
+          </div>
+		  
+		  <button class="btn waves-effect waves-light" id="decrypt_btn">Decrypt
+            <i class="material-icons right">send</i>
+          </button>
+
+		  <div id="plaintext_card" class="card-panel hide">
+			<h5 class="indigo-text text-darken-4">Plaintext </h5>
+			<p id="plaintext"></p>
+		  </div>
         </div>
 
         <div id="authors" class="section scrollspy">
