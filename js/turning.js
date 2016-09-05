@@ -28,10 +28,21 @@ $(document).ready(function() {
   });
   
   $("#decrypt_btn").click(function() {
+	
+	var key = last_key;
+	if (last_key == "custom") {
+		key = [];
+		$("#custom_key input").each(function(id) {
+			if($(this).prop('checked')) {
+				key.push(id);
+			}
+		});
+	}	
+	
     $.ajax({
       type: 'GET',
       url: 'https://turning-grille.appspot.com/_ah/api/turning/v1/decipher',
-      data: {ciphertext: $("#ciphertext_input").val(), grilleKey: last_key},
+      data: {ciphertext: $("#ciphertext_input").val(), grilleKey: key},
       contentType: "application/json; charset=utf-8",
       traditional: true,
       success: function (data) {
@@ -45,12 +56,43 @@ $(document).ready(function() {
   });
   
   $("#type_key").change(function() {
-	 if ($("#type_key").val() == "lk" && last_key == "") {
+	 if ($("#type_key").val() == "lk") {
+		 if(last_key == "") {
 			Materialize.toast("There isn't a last key", 4000);
+		 }
+		 $("#custom_key").addClass("hide");
+		 $("#size_key_div").addClass("hide");
 	 } else if ($("#type_key").val() == "ck") {
 		 $("#size_key_div").removeClass("hide");
 	 }
   });
+  
+  $("#size_key_input").change(function() {
+	 var size_key = $(this).val();
+	 if(size_key % 2 != 0) {
+		 Materialize.toast("The size of the matrix must be an even number", 4000);
+	 } else {
+		$("#custom_key").removeClass("hide");
+		drawCustomKey(size_key);
+		last_key = "custom";
+	 }
+  });
+  
+  
+	function drawCustomKey(size) {
+		var html = "<h4> Custom key </h4>";
+		var idx = 0;
+		for (var i = 0; i < size; i++) {
+			html += "<p>";
+			for (var j = 0; j < size; j++) {
+				html += '<input type="checkbox" class="filled-in" id="k' + idx + '" /> \
+			  <label for="k'+ idx + '"></label>';
+			  idx++;
+			}
+			html += "</p>";
+		}
+		$("#custom_key").html(html);
+	}
 
     function drawBoard(canvas, mask, lm){
 		var context = $("#canvas_mask"+canvas)[0].getContext("2d");
