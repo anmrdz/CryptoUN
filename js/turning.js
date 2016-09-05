@@ -1,6 +1,9 @@
 $(document).ready(function() {
 	
 	var last_key = "";
+	var colors = ["#995115", "#cc0020", "#00aacc", "#7300cc"];
+	var message = "";
+	var m_idx = 0;
 	
   $("#encrypt_btn").click(function() {
 	var plaintxt = $("#plaintext_input").val()
@@ -15,6 +18,8 @@ $(document).ready(function() {
         $("#ciphertext").text(data.cipherText);
 		var sq = Math.floor(Math.sqrt(plaintxt.length));
 		var lm = sq % 2 == 0? ((sq*sq) < plaintxt.length? sq + 2 : sq): sq + 1;
+		message = plaintxt;
+		drawBoard("_key", data.key, lm);
 		for (var mask = 0; mask < 4; mask++) {
 			drawBoard(mask, data.keyMap[mask], lm);
 		}
@@ -37,7 +42,13 @@ $(document).ready(function() {
 				key.push(id);
 			}
 		});
-	}	
+		//TODO service to validate key
+	}
+	
+	if($("#ciphertext_input").val() == "") {
+		Materialize.toast("The ciphertext can't be empty", 4000);
+		return;
+	}
 	
     $.ajax({
       type: 'GET',
@@ -50,7 +61,7 @@ $(document).ready(function() {
         $("#plaintext").text(data.data);
       },
       error: function (error) {
-        alert("Request failed with status " + error.status);
+        Materialize.toast("Sorry your ciphertext couldn't be decrypted, check your key", 4000);
       }
     });
   });
@@ -95,6 +106,7 @@ $(document).ready(function() {
 	}
 
     function drawBoard(canvas, mask, lm){
+			
 		var context = $("#canvas_mask"+canvas)[0].getContext("2d");
 		var board_w = 40 * lm;
 		var board_h = board_w;
@@ -105,14 +117,27 @@ $(document).ready(function() {
 		context.canvas.width = board_w + 20;
 		context.beginPath();
 		context.font = "35pt Roboto";
+		context.fillStyle = canvas == "_key"? colors[0]: colors[canvas];
+		
+		if (canvas != "_key" && canvas> 0) {
+			var cs = $("#canvas_mask"+ (canvas - 1))[0].getContext("2d");
+			context.drawImage(cs.canvas, 0, 0);
+		}
 
 		for (var x = 0; x <= board_w; x += 40) {
 			context.moveTo(0.5 + x + p, p);
 			context.lineTo(0.5 + x + p, board_h + p);
 		}
 		
-		for (var idx = 0; idx < lm; idx++){
-			context.fillText("*", (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);
+		for (var idx = 0; idx < mask.length; idx++){
+			if(canvas == "_key" ){
+			 context.fillText("*", (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);
+			} else if(m_idx < message.length) {
+				context.fillText(message[m_idx], (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);
+				m_idx++;
+			} else {
+			context.fillText("%", (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);	
+			}
 		}
 
 		for (var x = 0; x <= board_h; x += 40) {
