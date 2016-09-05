@@ -40,11 +40,17 @@
               <p id="ciphertext" class="flow-text"></p>
             </div>
 			
-			
-    <canvas id="canvas_mask0" class="hide" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
-	<canvas id="canvas_mask1" class="hide" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
-	<canvas id="canvas_mask2" class="hide" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
-	<canvas id="canvas_mask3" class="hide" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
+		<div id="div_masks" class="center-align hide">
+		<h4>Key</h4>
+		<canvas id="canvas_mask3" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
+		<h4>Rotation 1</h4>
+		<canvas id="canvas_mask0" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
+		<h4>Rotation 2</h4>
+		<canvas id="canvas_mask1" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
+		<h4>Rotation 3</h4>
+		<canvas id="canvas_mask2" width="420px" height="420px" style="background: #fff;     magrin:20px;"></canvas>
+		</div>
+		
       
         </div>
 
@@ -58,23 +64,48 @@
             <label for="icon_prefix">Ciphertext</label>
           </div>
 		  
-		  <div class="input-field col s12">
-            <i class="material-icons prefix">edit</i>
-            <input id="key_input" type="text" class="validate">
-            <label for="icon_prefix">Key</label>
-          </div>
+		   <div class="input-field col s6">
+			<select id="type_key">
+			  <option value="" disabled selected>Choose a key</option>
+			  <option value="lk">Last key</option>
+			  <option value="ck">Custom key</option>
+			</select>
+			<label>Key</label>
+		  </div>
 		  
+		  <div id="size_key_div" class="input-field col s6 hide">
+            <i class="material-icons prefix">edit</i>
+            <input id="size_key_input" type="text" class="validate">
+            <label for="icon_prefix">Size</label>
+          </div>
+		 
+		  
+		 <div id="custom_key" class="col s12 center-align">
+		 <h4> Custom key </h4>
+			<p>
+			  <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+			  <label for="filled-in-box"></label>
+			  
+			  <input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
+			  <label for="filled-in-box1"></label>
+			  <input type="checkbox" class="filled-in" id="filled-in-box2" checked="checked" />
+			  <label for="filled-in-box2"></label>
+			</p>
+		</div>
+  
+		 <div class="col s12"> 
 		  <button class="btn waves-effect waves-light" id="decrypt_btn">Decrypt
             <i class="material-icons right">send</i>
           </button>
+		  </div>
 
-		  <div id="plaintext_card" class="card-panel hide">
+		  <div id="plaintext_card" class="col s12 card-panel hide">
 			<h5 class="indigo-text text-darken-4">Plaintext </h5>
 			<p id="plaintext"></p>
 		  </div>
         </div>
 
-        <div id="authors" class="section scrollspy">
+        <div id="authors" class="section scrollspy col s12">
           <h4 class="light-blue-text text-darken-4"> Authors </h4>
           <div class="divider"></div>
         </div>
@@ -92,6 +123,7 @@
   $(document).ready(function(){
     $(".button-collapse").sideNav();
     $('.scrollspy').scrollSpy();
+	$('select').material_select();
   });
 
   </script>

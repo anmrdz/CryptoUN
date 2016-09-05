@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+	var last_key = "";
+	
   $("#encrypt_btn").click(function() {
 	var plaintxt = $("#plaintext_input").val()
     $.ajax({
@@ -16,6 +18,8 @@ $(document).ready(function() {
 		for (var mask = 0; mask < 4; mask++) {
 			drawBoard(mask, data.keyMap[mask], lm);
 		}
+		$("#div_masks").removeClass("hide");
+		last_key = data.keyMap[3];
       },
       error: function (error) {
         alert("Request failed with status " + error.status);
@@ -27,7 +31,7 @@ $(document).ready(function() {
     $.ajax({
       type: 'GET',
       url: 'https://turning-grille.appspot.com/_ah/api/turning/v1/decipher',
-      data: {ciphertext: $("#ciphertext_input").val(), grilleKey: $("#key_input").val()},
+      data: {ciphertext: $("#ciphertext_input").val(), grilleKey: last_key},
       contentType: "application/json; charset=utf-8",
       traditional: true,
       success: function (data) {
@@ -39,9 +43,16 @@ $(document).ready(function() {
       }
     });
   });
+  
+  $("#type_key").change(function() {
+	 if ($("#type_key").val() == "lk" && last_key == "") {
+			Materialize.toast("There isn't a last key", 4000);
+	 } else if ($("#type_key").val() == "ck") {
+		 $("#size_key_div").removeClass("hide");
+	 }
+  });
 
     function drawBoard(canvas, mask, lm){
-		$("#canvas_mask"+canvas).removeClass("hide");
 		var context = $("#canvas_mask"+canvas)[0].getContext("2d");
 		var board_w = 40 * lm;
 		var board_h = board_w;
