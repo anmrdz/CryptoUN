@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var plaintxt = $("#plaintext_input").val()
     $.ajax({
       type: 'GET',
-      url: 'https://crypto-142003.appspot.com/_ah/api/cryptoAPI/v1/getCipherTextWithKey',
+      url: 'https://turning-grille.appspot.com/_ah/api/turning/v1/getCipherTextWithKey',
       data: {plaintext: plaintxt},
       contentType: "application/json; charset=utf-8",
       traditional: true,
@@ -25,8 +25,8 @@ $(document).ready(function() {
   
   $("#decrypt_btn").click(function() {
     $.ajax({
-      type: 'POST',
-      url: 'https://crypto-142003.appspot.com/_ah/api/cryptoAPI/v1/decipher',
+      type: 'GET',
+      url: 'https://turning-grille.appspot.com/_ah/api/turning/v1/decipher',
       data: {ciphertext: $("#ciphertext_input").val(), grilleKey: $("#key_input").val()},
       contentType: "application/json; charset=utf-8",
       traditional: true,
