@@ -1,130 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="css/turning.css"  media="screen,projection"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta charset="UTF-8">
-  <title>Turning Grille</title>
-</head>
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/home.css" media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 
-<body>
-  <ul id="slide-out" class="side-nav fixed section table-of-contents">
-    <li><div class="card-panel  light-blue accent-3">
-      <h1 class="white-text">Turning Grille</h1>
-    </div></li>
-    <li><a href="#encrypt"><i class="material-icons">lock</i>Encrypt</a></li>
-    <li><a href="#decrypt"><i class="material-icons">lock_open</i>Decrypt</a></li>
-    <li><div class="divider"></div></li>
-    <li><a href="#authors">Authors</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>Crypto UN</title>
+  </head>
 
-  <main>
-    <div class="row">
-      <div class="col s12 m9 l10">
-	  
-        <div id="encrypt" class="section scrollspy">
-          <h2 class="light-blue-text text-darken-4"> Encrypt </h2>
-          <div class="divider"></div>
-          <div class="input-field col s12">
-            <i class="material-icons prefix">edit</i>
-            <input id="plaintext_input" type="text" class="validate">
-            <label for="icon_prefix">Plaintext</label>
-          </div>
-          <button class="btn waves-effect waves-light" id="encrypt_btn">Encrypt
-            <i class="material-icons right">send</i>
-          </button>
+  <body>
+    <header>
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="turning.html">Turning grille</a></li>
+        <li><a href="cfb.html">CFB Mode</a></li>
+        <li><a href="des.html">DES</a></li>
+        <li><a href="aes.html">AES</a></li>
+      </ul>
+      
+      <ul id="dropdown2" class="dropdown-content">
+        <li><a href="turning.html">Turning grille</a></li>
+        <li><a href="cfb.html">CFB Mode</a></li>
+        <li><a href="des.html">DES</a></li>
+        <li><a href="aes.html">AES</a></li>
+      </ul>
 
-            <div id="ciphertext_card" class="card-panel z-depth-3 hide">
-              <h5 class="indigo-text text-darken-4">Ciphertext </h5>
-              <p id="ciphertext" class="flow-text"></p>
-            </div>
-			
-		<div id="div_masks" class="center-align hide">
-		<h4>Key</h4>
-		<canvas id="canvas_mask_key" width="420px" height="420px" style="background: #fff; magrin:20px;"></canvas>
-		<h4>Rotation 1</h4>
-		<canvas id="canvas_mask0" width="420px" height="420px" style="background: #fff; magrin:20px;"></canvas>
-		<h4>Rotation 2</h4>
-		<canvas id="canvas_mask1" width="420px" height="420px" style="background: #fff; magrin:20px;"></canvas>
-		<h4>Rotation 3</h4>
-		<canvas id="canvas_mask2" width="420px" height="420px" style="background: #fff; magrin:20px;"></canvas>
-		<h4>Rotation 4</h4>
-		<canvas id="canvas_mask3" width="420px" height="420px" style="background: #fff; magrin:20px;"></canvas>
-		</div>
-		
-	  </div>
-        <div id="decrypt" class="section scrollspy">
-          <h2 class="light-blue-text text-darken-4"> Decrypt </h2>
-          <div class="divider"></div>
-		  
-		  <div class="input-field col s12">
-            <i class="material-icons prefix">edit</i>
-            <input id="ciphertext_input" type="text" class="validate">
-            <label for="icon_prefix">Ciphertext</label>
-          </div>
-		  
-		   <div class="input-field col s6">
-			<select id="type_key">
-			  <option value="" disabled selected>Choose a key</option>
-			  <option value="lk">Last key</option>
-			  <option value="ck">Custom key</option>
-			</select>
-			<label>Key</label>
-		  </div>
-		  
-		  <div id="size_key_div" class="input-field col s6 hide">
-            <i class="material-icons prefix">edit</i>
-            <input id="size_key_input" type="text" class="validate">
-            <label for="icon_prefix">Size of matrix</label>
-          </div>
-		 
-		  
-		 <div id="custom_key" class="col s12 center-align hide">
-		
-		</div>
-  
-		 <div class="col s12"> 
-		  <button class="btn waves-effect waves-light" id="decrypt_btn">Decrypt
-            <i class="material-icons right">send</i>
-          </button>
-		  </div>
-
-		  <div id="plaintext_card" class="col s12 card-panel z-depth-3 hide">
-			<h5 class="indigo-text text-darken-4">Plaintext </h5>
-			<p id="plaintext" class="flow-text"></p>
-		  </div>
+      <nav>
+        <div class="nav-wrapper light-blue darken-2">
+          <a href="#!" class="brand-logo">&nbsp;Crypto UN</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="about.html">About us</a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Algorithms<i class="material-icons right">arrow_drop_down</i></a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="about.html">About us</a></li>
+            <li><a id="a" class="dropdown-button" href="#!" data-activates="dropdown2">Algorithms<i class="material-icons right">arrow_drop_down</i></a></li>
+          </ul>
         </div>
+      </nav>
+    </header>
+    <main>
 
-        <div id="authors" class="section scrollspy col s12">
-          <h4 class="light-blue-text text-darken-4"> Authors </h4>
-          <div class="divider"></div>
-		  <div class="col s2"><img id="escudo" src="img/escudo.jpg" class="left-align responsive-img"/></div>
-		  <div class="col s10">
-		  <p>Hugo Alejandro Arias Zamora </p>
-		  <p>Oscar De Ángel Jiménez </p>
-		  <p>Ana María Rodríguez Reyes </p>
-		  </div>
+      <div class="row">
+        <div class="col s12">
+
+          <div class="section white">
+            <div class="row container">
+              <h3 class="header light-blue-text text-darken-4">Crypto UN</h3>
+              <h5 class="grey-text text-darken-3 lighten-3">Test several encryption algorithms, hide your messages using a public key encryption algorithm, learn about cryptography</h5>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+
+    </main>
+
+    <footer class="page-footer white">
+
+        <div class="row">
+          <div id="authors" class="col s10 offset-s1">
+            <!--<h4 class="light-blue-text text-darken-4"> Authors </h4>-->
+            <div class="divider"></div>
+		        <div class="col s2"><img id="escudo" src="img/escudo.jpg" class="left-align responsive-img"/></div>
+		        <div class="col s10">
+        		  <p>Hugo Alejandro Arias Zamora </p>
+        		  <p>Oscar De Ángel Jiménez </p>
+        		  <p>Ana María Rodríguez Reyes </p>
+      		  </div>
+          </div>
+        </div>
+
+        <div class="footer-copyright light-blue darken-4">
+          <div class="container black-text">
+          © 2016 Universidad Nacional de Colombia
+          </div>
+        </div>
+    </footer>
 
 
-  </main>
-
-
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/turning.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-  <script>
-  $(document).ready(function(){
-    $(".button-collapse").sideNav();
-    $('.scrollspy').scrollSpy();
-	$('select').material_select();
-  });
-
-  </script>
-</body>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!--<script src="js/turning.js"></script>-->
+    <script src="js/home.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  </body>
 </html>
