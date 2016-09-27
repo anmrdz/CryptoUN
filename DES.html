@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/turning.css"  media="screen,projection"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <title>DES</title>
+</head>
+
+<body>
+  <ul id="slide-out" class="side-nav fixed section table-of-contents">
+    <li><div class="card-panel  light-blue accent-3">
+      <h1 class="white-text">DES</h1>
+	  <h5 class="white-text flow-text">Data Encryption Standard</h5> 
+    </div></li>
+    <li><a href="#encrypt"><i class="material-icons">lock</i>Encrypt</a></li>
+    <li><a href="#decrypt"><i class="material-icons">lock_open</i>Decrypt</a></li>
+    <li><div class="divider"></div></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+  <main>
+    <div class="row">
+      <div class="col s12 m9 l10">
+	  
+        <div id="encrypt" class="section scrollspy">
+          <h2 class="light-blue-text text-darken-4"> Encrypt </h2>
+          <div class="divider"></div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">edit</i>
+            <input id="plaintext_input" type="text" class="validate">
+            <label for="icon_prefix">Plaintext</label>
+          </div>
+          <button class="btn waves-effect waves-light" id="encrypt_btn">Encrypt
+            <i class="material-icons right">send</i>
+          </button>
+
+            <div id="ciphertext_card" class="card-panel z-depth-3 hide">
+              <h5 class="indigo-text text-darken-4">Ciphertext </h5>
+              <p id="ciphertext" class="flow-text"></p>
+            </div>
+			
+			<div id="iv_card" class="card-panel z-depth-3 hide">
+              <h5 class="indigo-text text-darken-4">IV </h5>
+              <p id="iv" class="flow-text"></p>
+            </div>
+			
+			<div id="key_card" class="card-panel z-depth-3 hide">
+              <h5 class="indigo-text text-darken-4">Key </h5>
+              <p id="key" class="flow-text"></p>
+            </div>
+	  </div>
+	  
+        <div id="decrypt" class="section scrollspy">
+          <h2 class="light-blue-text text-darken-4"> Decrypt </h2>
+          <div class="divider"></div>
+		  
+		  <div class="input-field col s12">
+            <i class="material-icons prefix">edit</i>
+            <input id="ciphertext_input" type="text" class="validate">
+            <label for="icon_prefix">Ciphertext</label>
+          </div>
+		  
+		   <div class="input-field col s6">
+			<select id="type_key">
+			  <option value="" disabled selected>Choose a key and IV</option>
+			  <option value="lk">Last key and IV</option>
+			  <option value="ck">Custom key and IV</option>
+			</select>
+			<label>Key</label>
+		  </div>	 
+		 
+		 <div id="custom" class="col s12 hide">
+			 <div class="input-field col s12">
+				<i class="material-icons prefix">edit</i>
+				<input id="customkey_input" type="text" class="validate">
+				<label for="icon_prefix">Custom key</label>
+			  </div>
+			  
+			  <div class="input-field col s12">
+				<i class="material-icons prefix">edit</i>
+				<input id="customiv_input" type="text" class="validate">
+				<label for="icon_prefix">Custom IV</label>
+			  </div>
+		  </div>
+  
+		 <div class="col s12"> 
+		  <button class="btn waves-effect waves-light" id="decrypt_btn">Decrypt
+            <i class="material-icons right">send</i>
+          </button>
+		  </div>
+
+		  <div id="plaintext_card" class="col s12 card-panel z-depth-3 hide">
+			<h5 class="indigo-text text-darken-4">Plaintext </h5>
+			<p id="plaintext" class="flow-text"></p>
+		  </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/des.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $(".button-collapse").sideNav();
+    $('.scrollspy').scrollSpy();
+	$('select').material_select();
+  });
+
+  </script>
+</body>
+</html>

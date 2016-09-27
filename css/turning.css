@@ -8,7 +8,7 @@ header, main, footer {
      }
    }
    
-#ciphertext, #plaintext {
+#ciphertext, #plaintext, #iv {
 	word-wrap:break-word;
 }
  
