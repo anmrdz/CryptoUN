@@ -7,7 +7,12 @@ $(document).ready(function() {
 	var typeAES = $("#size_key1").val()
 	console.log(typeAES)
 	if(typeAES == "" || typeAES == null) {
-		Materialize.toast("Select an AES type", 4000);
+		Materialize.toast("Select an AES type to encrypt", 4000);
+		return;
+	}
+	
+	if(plaintxt == "") {
+		Materialize.toast("The plaintext can't be empty", 4000);
 		return;
 	}
 	
@@ -42,7 +47,7 @@ $(document).ready(function() {
 	var key = last_key;
 	var liv = last_iv;
 	var ltype = last_type;
-	if (last_key == "custom") {
+	if ($("#type_key").val() == "ck") {
 		key = $("#customkey_input").val();
 		liv = $("#customiv_input").val();
 		ltype = $("#size_key").val();
@@ -53,8 +58,13 @@ $(document).ready(function() {
 		return;
 	}
 	
-	if (ltype == "") {
-		Materialize.toast("Select an AES type", 4000);
+	if ($("#type_key").val() == "" || $("#type_key").val() == null) {
+		Materialize.toast("Choose a key and IV", 4000);
+		return;
+	}
+	
+	if (ltype == "" || ltype == null) {
+		Materialize.toast("Select an AES type to decrypt", 4000);
 		return;
 	}
 	

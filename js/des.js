@@ -4,6 +4,12 @@ $(document).ready(function() {
 	
   $("#encrypt_btn").click(function() {
 	var plaintxt = $("#plaintext_input").val()
+	
+	if(plaintxt == "") {
+		Materialize.toast("The plaintext can't be empty", 4000);
+		return;
+	}
+	
     $.ajax({
       type: 'GET',
       url: 'https://cryptoun2016.appspot.com/_ah/api/criptoun/1/encryptCFBDES',
@@ -33,13 +39,18 @@ $(document).ready(function() {
 	
 	var key = last_key;
 	var liv = last_iv;
-	if (last_key == "custom") {
+	if ($("#type_key").val() == "ck") {
 		key = $("#customkey_input").val();
 		liv = $("#customiv_input").val();
 	}
 	
 	if($("#ciphertext_input").val() == "") {
 		Materialize.toast("The ciphertext can't be empty", 4000);
+		return;
+	}
+	
+	if($("#type_key").val() == "" || $("#type_key").val() == null || liv == "" || key == "") {
+		Materialize.toast("Choose a key and IV", 4000);
 		return;
 	}
 	
@@ -64,7 +75,7 @@ $(document).ready(function() {
 		 if(last_key == "") {
 			Materialize.toast("There isn't a last key", 4000);
 		 }
-		 $("#custom_key").addClass("hide");
+		 $("#custom").addClass("hide");
 	 } else if ($("#type_key").val() == "ck") {
 		 $("#custom").removeClass("hide");
 	 }
