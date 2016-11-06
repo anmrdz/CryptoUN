@@ -1,0 +1,9 @@
+.checked {
+	border: 1px solid black;
+  background-color: black;
+}
+
+.unchecked {
+  border: 1px solid black;
+  background-color: white;
+}

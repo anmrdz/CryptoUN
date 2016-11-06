@@ -1,10 +1,10 @@
 $(document).ready(function() {
-	
+
 	var last_key = "";
 	var colors = ["#995115", "#cc0020", "#00aacc", "#7300cc"];
 	var message = "";
 	var m_idx = 0;
-	
+
   $("#encrypt_btn").click(function() {
 	var plaintxt = $("#plaintext_input").val()
     $.ajax({
@@ -31,9 +31,9 @@ $(document).ready(function() {
       }
     });
   });
-  
+
   $("#decrypt_btn").click(function() {
-	
+
 	var key = last_key;
 	if (last_key == "custom") {
 		key = [];
@@ -44,12 +44,12 @@ $(document).ready(function() {
 		});
 		//TODO service to validate key
 	}
-	
+
 	if($("#ciphertext_input").val() == "") {
 		Materialize.toast("The ciphertext can't be empty", 4000);
 		return;
 	}
-	
+
     $.ajax({
       type: 'GET',
       url: 'https://turning-grille.appspot.com/_ah/api/turning/v1/decipher',
@@ -65,7 +65,7 @@ $(document).ready(function() {
       }
     });
   });
-  
+
   $("#type_key").change(function() {
 	 if ($("#type_key").val() == "lk") {
 		 if(last_key == "") {
@@ -77,7 +77,7 @@ $(document).ready(function() {
 		 $("#size_key_div").removeClass("hide");
 	 }
   });
-  
+
   $("#size_key_input").change(function() {
 	 var size_key = $(this).val();
 	 if(size_key % 2 != 0) {
@@ -88,8 +88,8 @@ $(document).ready(function() {
 		last_key = "custom";
 	 }
   });
-  
-  
+
+
 	function drawCustomKey(size) {
 		var html = "<h4> Custom key </h4>";
 		var idx = 0;
@@ -105,20 +105,20 @@ $(document).ready(function() {
 		$("#custom_key").html(html);
 	}
 
-    function drawBoard(canvas, mask, lm){
-			
+  function drawBoard(canvas, mask, lm){
+
 		var context = $("#canvas_mask"+canvas)[0].getContext("2d");
 		var board_w = 40 * lm;
 		var board_h = board_w;
 		var p = 10;
-		
+
 		context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 		context.canvas.height = board_h + 20;
 		context.canvas.width = board_w + 20;
 		context.beginPath();
 		context.font = "35pt Roboto";
 		context.fillStyle = canvas == "_key"? colors[0]: colors[canvas];
-		
+
 		if (canvas != "_key" && canvas> 0) {
 			var cs = $("#canvas_mask"+ (canvas - 1))[0].getContext("2d");
 			context.drawImage(cs.canvas, 0, 0);
@@ -128,7 +128,7 @@ $(document).ready(function() {
 			context.moveTo(0.5 + x + p, p);
 			context.lineTo(0.5 + x + p, board_h + p);
 		}
-		
+
 		for (var idx = 0; idx < mask.length; idx++){
 			if(canvas == "_key" ){
 			 context.fillText("*", (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);
@@ -136,7 +136,7 @@ $(document).ready(function() {
 				context.fillText(message[m_idx], (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);
 				m_idx++;
 			} else {
-			context.fillText("%", (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);	
+			context.fillText("%", (mask[idx]%lm) * 40 + 15, Math.floor(mask[idx]/lm) * 40 + 45);
 			}
 		}
 
@@ -148,6 +148,6 @@ $(document).ready(function() {
 		context.strokeStyle = "black";
 		context.stroke();
 		context.closePath();
-    } 
-  
+  }
+
 });

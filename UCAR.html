@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/turning.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/ca.css"  media="screen,projection"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <title>UCAR</title>
+</head>
+
+<body>
+  <ul id="slide-out" class="side-nav fixed section table-of-contents">
+    <li><div class="card-panel  light-blue accent-3">
+      <h1 class="white-text">UCAR</h1>
+	  <h5 class="white-text flow-text">Unidimentional cellular automata reversible</h5>
+    </div></li>
+    <li><a href="#encrypt"><i class="material-icons">lock</i>Generate</a></li>
+    <li><div class="divider"></div></li>
+	<li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+  <main>
+    <div class="row">
+      <div class="col s12 m9 l10">
+        <div id="encrypt" class="section scrollspy">
+          <h2 class="light-blue-text text-darken-4"> Generate </h2>
+          <div class="divider"></div>
+
+          <div class="input-field col s12">
+            <i class="material-icons prefix">edit</i>
+            <input id="rule_input" type="number" class="validate">
+            <label for="icon_prefix">rule</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">edit</i>
+            <input id="bits_input" type="number" class="validate">
+            <label for="icon_prefix">Number of bits</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">edit</i>
+            <input id="iterations_input" type="number" class="validate">
+            <label for="icon_prefix">Iterations</label>
+          </div>
+          <button class="btn waves-effect waves-light" id="generate_btn">Generate
+            <i class="material-icons right">send</i>
+          </button><br/><br/><br/>
+          <div id="output" class="col s12 center-align">
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/ucar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $(".button-collapse").sideNav();
+    $('.scrollspy').scrollSpy();
+	$('select').material_select();
+  });
+
+  </script>
+</body>
+</html>
